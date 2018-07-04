@@ -23,14 +23,12 @@ Profiles:
             ComposerConsortium:
                 Organizations:
                     - *Org1
-                    - *Org2
     ComposerChannel:
         Consortium: ComposerConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *Org1
-                - *Org2
 
 ################################################################################
 #
@@ -94,7 +92,7 @@ Orderer: &OrdererDefaults
     OrdererType: kafka
 
     Addresses:
-        - orderer.example.com:7050
+        - {IP-HOST-1}:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -119,7 +117,7 @@ Orderer: &OrdererDefaults
         # NOTE: Use IP:port notation
         Brokers:
             - 127.0.0.1:9092
-            - 
+
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network
