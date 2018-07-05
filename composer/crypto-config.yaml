@@ -6,6 +6,7 @@ OrdererOrgs:
 PeerOrgs:
   - Name: Org1
     Domain: org1.example.com
+    EnableNodeOUs: true
     Template:
       Count: 4
     Users:

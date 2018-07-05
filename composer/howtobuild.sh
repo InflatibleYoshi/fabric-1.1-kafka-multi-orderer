@@ -4,7 +4,6 @@ HOST1="10.0.0.113"
 HOST2="10.0.0.92"
 
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" configtx.yaml
-sed -i -e "s/{IP-HOST-1}/$HOST1/g" ../startFabric-Peer2.sh
 sed -i -e "s/{IP-HOST-2}/$HOST2/g" ../createPeerAdminCard.sh
 
 cryptogen generate --config=./crypto-config.yaml
