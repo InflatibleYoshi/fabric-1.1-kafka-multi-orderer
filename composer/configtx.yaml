@@ -117,11 +117,9 @@ Orderer: &OrdererDefaults
         # NOTE: Use IP:port notation
         Brokers:
             - {IP-HOST-1}:9092
-	    - {IP-HOST-1}:10092
-	    - {IP-HOST-1}:11092
+            - {IP-HOST-1}:10092
+            - {IP-HOST-1}:11092
             - {IP-HOST-1}:12092
-
-
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network
