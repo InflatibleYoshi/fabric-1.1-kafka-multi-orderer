@@ -197,6 +197,8 @@ services:
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    ports:
+      - 9092:9092
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -216,6 +218,8 @@ services:
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    ports:
+      - 10092:9092
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -235,6 +239,8 @@ services:
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    ports:
+      - 11092:9092
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -254,6 +260,8 @@ services:
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    ports:
+      - 12092:9092
     depends_on:
       - zookeeper0
       - zookeeper1
