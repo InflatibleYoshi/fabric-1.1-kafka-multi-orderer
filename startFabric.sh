@@ -35,6 +35,8 @@ sleep ${FABRIC_START_TIMEOUT}
 # Create the channel
 docker exec peer0.org1.example.com peer channel create -o orderer.example.com:7050 -c composerchannel -f /etc/hyperledger/configtx/composer-channel.tx --tls --cafile /etc/hyperledger/msp/orderer/msp/tlscacerts/tlsca.example.com-cert.pem
 
+echo ${FABRIC_START_TIMEOUT}
+sleep ${FABRIC_START_TIMEOUT}
 sleep ${FABRIC_START_TIMEOUT}
 
 # Join peer0.org1.example.com to the channel.

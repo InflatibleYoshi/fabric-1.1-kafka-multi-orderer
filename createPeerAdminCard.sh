@@ -116,7 +116,7 @@ cat << EOF > connection.json
                 "peer0.org1.example.com",
                 "peer1.org1.example.com",
                 "peer2.org1.example.com",
-                "peer3.org1.example.com",
+                "peer3.org1.example.com"
             ],
             "certificateAuthorities": [
                 "ca.org1.example.com"
@@ -125,7 +125,7 @@ cat << EOF > connection.json
     },
     "orderers": {
         "orderer.example.com": {
-            "url": "grpcs://{IP-HOST-1}:7050",
+            "url": "grpcs://localhost:7050",
             "grpcOptions": {
                 "ssl-target-name-override": "orderer.example.com"
             },
@@ -167,9 +167,9 @@ cat << EOF > connection.json
         },
          "peer3.org1.example.com": {
             "url": "grpcs://{IP-HOST-2}:10051",
-            "eventUrl": "grpcs://{IP-HOST-2}:10053"
+            "eventUrl": "grpcs://{IP-HOST-2}:10053",
             "grpcOptions": {
-                "ssl-target-name-override": "peer2.org1.example.com"
+                "ssl-target-name-override": "peer3.org1.example.com"
             },
             "tlsCACerts": {
                 "pem": "${ORG1CA}"
@@ -178,8 +178,8 @@ cat << EOF > connection.json
     },
     "certificateAuthorities": {
         "ca.org1.example.com": {
-            "url": "http://{IP-HOST-1}:7054",
-            "caName": "ca.org1.example.com"
+            "url": "https://{IP-HOST-1}:7054",
+            "caName": "ca.org1.example.com",
             "httpOptions": {
                 "verify": false
             }
