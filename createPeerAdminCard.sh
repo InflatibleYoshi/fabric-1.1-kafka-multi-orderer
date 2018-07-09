@@ -125,7 +125,7 @@ cat << EOF > connection.json
     },
     "orderers": {
         "orderer.example.com": {
-            "url": "grpcs://localhost:7050",
+            "url": "grpcs://{IP-HOST-1}:7050",
             "grpcOptions": {
                 "ssl-target-name-override": "orderer.example.com"
             },
