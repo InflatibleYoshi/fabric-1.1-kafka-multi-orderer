@@ -8,8 +8,9 @@ PeerOrgs:
     Domain: org1.example.com
     EnableNodeOUs: true
     Specs:
+      - Hostname: peer
         SANS:
-	  - {IP-HOST-1}
+          - {IP-HOST-1}
           - {IP-HOST-2}
     Template:
       Count: 4
