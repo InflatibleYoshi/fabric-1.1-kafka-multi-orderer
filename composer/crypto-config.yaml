@@ -7,7 +7,11 @@ PeerOrgs:
   - Name: Org1
     Domain: org1.example.com
     EnableNodeOUs: true
+    Specs:
+        SANS:
+	  - {IP-HOST-1}
+          - {IP-HOST-2}
     Template:
       Count: 4
     Users:
-      Count: 1
+      Count: 0
