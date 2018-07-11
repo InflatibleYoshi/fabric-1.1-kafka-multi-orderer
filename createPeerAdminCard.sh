@@ -8,7 +8,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Grab the file names of the keystore keys
 ORG1KEY="$(ls composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/)"
 
-ORDERERCA="$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' composer/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt)"
+ORDERER0CA="$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' composer/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/ca.crt)"
+ORDERER1CA="$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' composer/crypto-config/ordererOrganizations/example.com/orderers/orderer1.example.com/tls/ca.crt)"
 ORG1CA="$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' composer/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt)"
 
 Parse_Arguments() {
@@ -83,7 +84,8 @@ cat << EOF > connection.json
     "channels": {
         "composerchannel": {
             "orderers": [
-                "orderer.example.com"
+                "orderer0.example.com"
+                "orderer1.example.com"
             ],
             "peers": {
                 "peer0.org1.example.com": {
@@ -124,13 +126,22 @@ cat << EOF > connection.json
         }
     },
     "orderers": {
-        "orderer.example.com": {
+        "orderer0.example.com": {
             "url": "grpcs://{IP-HOST-1}:7050",
             "grpcOptions": {
-                "ssl-target-name-override": "orderer.example.com"
+                "ssl-target-name-override": "orderer0.example.com"
             },
             "tlsCACerts": {
-                "pem": "${ORDERERCA}"
+                "pem": "${ORDERER0CA}"
+            }
+        },
+        "orderer1.example.com": {
+            "url": "grpcs://{IP-HOST-2}:7050",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer1.example.com"
+            },
+            "tlsCACerts": {
+                "pem": "${ORDERER1CA}"
             }
         }
     },
