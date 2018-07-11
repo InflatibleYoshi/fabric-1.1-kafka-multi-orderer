@@ -86,7 +86,7 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp:/etc/hyperledger/msp/orderer/msp
     depends_on:
-      - orderer.example.com
+      - orderer0.example.com
       - couchdb
 
   couchdb:
@@ -134,7 +134,7 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp:/etc/hyperledger/msp/orderer/msp
     depends_on:
-      - orderer.example.com
+      - orderer0.example.com
       - couchdb1
 
   couchdb1:
