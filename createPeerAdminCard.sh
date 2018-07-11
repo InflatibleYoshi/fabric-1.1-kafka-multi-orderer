@@ -84,7 +84,7 @@ cat << EOF > connection.json
     "channels": {
         "composerchannel": {
             "orderers": [
-                "orderer0.example.com"
+                "orderer0.example.com",
                 "orderer1.example.com"
             ],
             "peers": {
