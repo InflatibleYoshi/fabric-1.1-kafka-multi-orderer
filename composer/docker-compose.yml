@@ -17,8 +17,8 @@ services:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.org1.example.com
 
-  orderer.example.com:
-    container_name: orderer.example.com
+  orderer0.example.com:
+    container_name: orderer0.example.com
     image: hyperledger/fabric-orderer:$ARCH-1.1.0
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
@@ -35,15 +35,15 @@ services:
       - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
       - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
       - ORDERER_KAFKA_VERBOSE=true
-      - CONFIGTX_ORDERER_KAFKA_BROKERS=[{IP-HOST-1}:9092,{IP-HOST-1}:10092,{IP-HOST-1}:11092,{IP-HOST-1}:12093]
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092, kafka1:9092, kafka2:9092, kafka3:9092]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: orderer
     ports:
       - 7050:7050
     volumes:
         - ./:/etc/hyperledger/configtx
-        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/etc/hyperledger/msp/orderer/msp
-        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls:/etc/hyperledger/tls/orderer/tls
+        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp:/etc/hyperledger/msp/orderer/msp
+        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls:/etc/hyperledger/tls/orderer/tls
     depends_on:
       - kafka0
       - kafka1
@@ -84,7 +84,7 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/peer/msp
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/peer/tls
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
-        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/etc/hyperledger/msp/orderer/msp
+        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp:/etc/hyperledger/msp/orderer/msp
     depends_on:
       - orderer.example.com
       - couchdb
@@ -132,7 +132,7 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/peer/msp
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls:/etc/hyperledger/peer/tls
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
-        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/etc/hyperledger/msp/orderer/msp
+        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp:/etc/hyperledger/msp/orderer/msp
     depends_on:
       - orderer.example.com
       - couchdb1
@@ -154,7 +154,7 @@ services:
       - ZOO_MY_ID=1
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     ports:  
-      - '2181'
+      - 2181:2181
       - '2888'
       - '3888'
 
@@ -167,7 +167,7 @@ services:
       - ZOO_MY_ID=2
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     ports:  
-      - '2181'
+      - 3181:2181
       - '2888'
       - '3888'
 
@@ -180,7 +180,7 @@ services:
       - ZOO_MY_ID=3
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     ports:  
-      - '2181'
+      - 4181:2181
       - '2888'
       - '3888'
 
@@ -197,9 +197,9 @@ services:
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-      - 9092:9092
+      - 9092
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -218,9 +218,9 @@ services:
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-      - 10092:9092
+      - 9092
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -239,9 +239,9 @@ services:
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-      - 11092:9092
+      - 9092
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -260,9 +260,9 @@ services:
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_LOG_RETENTION_MS=-1
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-      - 12092:9092
+      - 9092
     depends_on:
       - zookeeper0
       - zookeeper1

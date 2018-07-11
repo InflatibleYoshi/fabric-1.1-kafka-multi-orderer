@@ -75,6 +75,8 @@ Organizations:
             # encoded in the genesis block in the Application section context
             - Host: peer0.org1.example.com
               Port: 7051
+            - Host: peer2.org1.example.com
+              Port: 9051
 
 
 ################################################################################
@@ -93,6 +95,7 @@ Orderer: &OrdererDefaults
 
     Addresses:
         - {IP-HOST-1}:7050
+        - {IP-HOST-2}:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -116,10 +119,10 @@ Orderer: &OrdererDefaults
         # Brokers: A list of Kafka brokers to which the orderer connects
         # NOTE: Use IP:port notation
         Brokers:
-            - {IP-HOST-1}:9092
-            - {IP-HOST-1}:10092
-            - {IP-HOST-1}:11092
-            - {IP-HOST-1}:12092
+            - kafka0:9092
+            - kafka1:9092
+            - kafka2:9092
+            - kafka3:9092
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network

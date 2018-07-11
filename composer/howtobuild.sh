@@ -4,6 +4,7 @@ HOST1="10.0.0.113"
 HOST2="10.0.0.92"
 
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" configtx.yaml
+sed -i -e "s/{IP-HOST-2}/$HOST1/g" configtx.yaml
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" crypto-config.yaml
 sed -i -e "s/{IP-HOST-2}/$HOST2/g" crypto-config.yaml
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" ../createPeerAdminCard.sh

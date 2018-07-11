@@ -2,9 +2,13 @@ OrdererOrgs:
   - Name: Orderer
     Domain: example.com
     Specs:
-      - Hostname: orderer
+      - Hostname: orderer0
         SANS:
           - {IP-HOST-1}
+      - Hostname: orderer1
+        SANS:
+          - {IP-HOST-2}
+
 PeerOrgs:
   - Name: Org1
     Domain: org1.example.com
