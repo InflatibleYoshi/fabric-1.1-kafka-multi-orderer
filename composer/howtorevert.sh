@@ -7,6 +7,8 @@ sed -i -e "s/$HOST1/{IP-HOST-1}/g" configtx.yaml
 sed -i -e "s/$HOST2/{IP-HOST-2}/g" configtx.yaml
 sed -i -e "s/$HOST1/{IP-HOST-1}/g" crypto-config.yaml
 sed -i -e "s/$HOST2/{IP-HOST-2}/g" crypto-config.yaml
+sed -i -e "s/$HOST1/{IP-HOST-1}/g" docker-compose.yml
+sed -i -e "s/$HOST1/{IP-HOST-1}/g" docker-compose-peer2.yml
 sed -i -e "s/$HOST1/{IP-HOST-1}/g" ../createPeerAdminCard.sh
 sed -i -e "s/$HOST2/{IP-HOST-2}/g" ../createPeerAdminCard.sh
 
