@@ -4,13 +4,16 @@ HOST1="10.0.0.113"
 HOST2="10.0.0.92"
 
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" configtx.yaml
-sed -i -e "s/{IP-HOST-2}/$HOST2/g" configtx.yaml
+#sed -i -e "s/{IP-HOST-2}/$HOST2/g" configtx.yaml
+{CONFIGTX}
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" crypto-config.yaml
-sed -i -e "s/{IP-HOST-2}/$HOST2/g" crypto-config.yaml
+#sed -i -e "s/{IP-HOST-2}/$HOST2/g" crypto-config.yaml
+{CRYPTOCONFIG}
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose.yml
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose-peer2.yml
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" ../createPeerAdminCard.sh
-sed -i -e "s/{IP-HOST-2}/$HOST2/g" ../createPeerAdminCard.sh
+#sed -i -e "s/{IP-HOST-2}/$HOST2/g" ../createPeerAdminCard.sh
+{PEERADMINCARD}
 
 cryptogen generate --config=./crypto-config.yaml
 export FABRIC_CFG_PATH=$PWD

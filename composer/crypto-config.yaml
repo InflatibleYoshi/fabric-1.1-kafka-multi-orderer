@@ -5,9 +5,10 @@ OrdererOrgs:
       - Hostname: orderer0
         SANS:
           - {IP-HOST-1}
-      - Hostname: orderer1
-        SANS:
-          - {IP-HOST-2}
+          {Orderer Hostname SANS}
+      #- Hostname: orderer1
+      #  SANS:
+      #    - {IP-HOST-2}
 
 PeerOrgs:
   - Name: Org1
@@ -17,8 +18,9 @@ PeerOrgs:
       - Hostname: peer
         SANS:
           - {IP-HOST-1}
-          - {IP-HOST-2}
+          {Peer SANS}
+          #- {IP-HOST-2}
     Template:
-      Count: 4
+      Count: {Num of Peers} #4
     Users:
       Count: 0
