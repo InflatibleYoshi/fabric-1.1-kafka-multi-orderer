@@ -26,14 +26,14 @@ Organizations:
         AnchorPeers:
             - Host: peer0.org1.example.com
               Port: 7051
-            {Anchor Peers}
+{Anchor Peers}
             #- Host: peer2.org1.example.com
             #  Port: 9051
 
 Orderer: &OrdererDefaults
     OrdererType: kafka
     Addresses:
-        {Orderers}       
+{Orderers}       
         #- {IP-HOST-1}:7050
         #- {IP-HOST-2}:7050
     BatchTimeout: 2s
