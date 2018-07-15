@@ -1,16 +1,76 @@
 import string
-from subprocess import call
-import sys, getopt
+from sys import argv
 
-def main(arg1, *argv):
-    anchorPeers = ""
-    orderers  = ""
-    arg1 -= 1
-    for i in range(arg1):
-        anchorPeers += "         - peer" + (i+1) * 2 + ".org1.example.com\n"
-        anchorPeers += "         - Port: 9051\n"
-    call("sed -i -e 's/{Anchor Peers}/"+ anchorPeers + "/g' ../composer/configtx.yaml")
+script, arg1 = argv
+arg1 = int(arg1)
 
-    for i in range(arg1):
-        orderers += "      - {IP-HOST-" + (i+1)+ "}:7050\n"    
-    call("sed -i -e 's/{Orderers}/"+ orderers + "/g' ../composer/configtx.yaml")
+anchorPeers = ""
+orderers  = ""
+arg1 -= 1
+for i in range(arg1):
+    anchorPeers += "            - Host: peer" + str( (i+1) * 2 ) + ".org1.example.com\n"
+    anchorPeers += "            - Port: 9051\n"
+
+for i in range(arg1):
+    orderers += '        - {IP-HOST-' + str( (i+2)) + "}:7050\n"
+
+file = """Profiles:
+    ComposerOrdererGenesis:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            ComposerConsortium:
+                Organizations:
+                    - *Org1
+    ComposerChannel:
+        Consortium: ComposerConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Org1
+Organizations:
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: crypto-config/ordererOrganizations/example.com/msp
+    - &Org1
+        Name: Org1
+        ID: Org1MSP
+        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
+        AnchorPeers:
+            - Host: peer0.org1.example.com
+              Port: 7051
+""" + anchorPeers + """
+Orderer: &OrdererDefaults
+    OrdererType: kafka
+    Addresses:
+        - {IP-HOST-1}:7050
+""" + orderers + """
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 98 MB
+        PreferredMaxBytes: 512 KB
+    Kafka:
+        Brokers:
+            - kafka0:9092
+            - kafka1:9092
+            - kafka2:9092
+            - kafka3:9092
+    Organizations:
+
+Application: &ApplicationDefaults
+    Organizations:
+Capabilities:
+    Global: &ChannelCapabilities
+        V1_1: true
+    Orderer: &OrdererCapabilities
+        V1_1: true
+    Application: &ApplicationCapabilities
+        V1_1: true"""
+
+text_file = open("composer/configtx.yaml", "w")
+text_file.write(file)
+text_file.close()
