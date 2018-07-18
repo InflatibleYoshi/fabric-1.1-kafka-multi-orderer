@@ -30,7 +30,7 @@ resource "aws_instance" "fabric" {
   count                  = 1
   availability_zone      = "us-east-1a"
   private_ip             = "192.168.1.5"
-  ami                    = "ami-69043c16"
+  ami                    = "ami-a07d46df"
   instance_type          = "t2.large"
   key_name               = "default"
   subnet_id              = "${aws_subnet.fabric-subnet.id}"
@@ -38,15 +38,15 @@ resource "aws_instance" "fabric" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/multi-machine-HLF11",
-      "sudo git clone https://github.com/jean507/multi-machine-HLF11",
-      "cd multi-machine-HLF11",
-      "python start.py ${var.n} terraform",
+      "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/fabric-1.1-kafka-multi-orderer",
+      "sudo git clone https://github.com/InflatibleYoshi/fabric-1.1-kafka-multi-orderer",
+      "cd fabric-1.1-kafka-multi-orderer",
+      "sudo python start.py ${var.n} terraform",
       "cd composer",
-      "./howtobuild.sh",
+      "sudo ./howtobuild.sh",
       "cd ..",
       "./startFabric.sh",
-      "./createPeerAdminCard.sh",
+      "sudo ./createPeerAdminCard.sh",
       "composer-playground",
     ]
 
@@ -63,7 +63,7 @@ resource "aws_instance" "fabric-peers" {
   count                  = "${var.n - 1}"
   availability_zone      = "us-east-1a"
   private_ip             = "192.168.1.${count.index + 6}"
-  ami                    = "ami-69043c16"
+  ami                    = "ami-a07d46df"
   instance_type          = "t2.large"
   key_name               = "default"
   subnet_id              = "${aws_subnet.fabric-subnet.id}"
@@ -71,10 +71,10 @@ resource "aws_instance" "fabric-peers" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/multi-machine-HLF11",
-      "cd multi-machine-HLF11",
+      "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/fabric-1.1-kafka-multi-orderer",
+      "cd fabric-1.1-kafka-multi-orderer",
       "./startFabric-Peer${count.index + 2}.sh",
-      "./createPeerAdminCard.sh",
+      "sudo ./createPeerAdminCard.sh",
       "composer-playground",
     ]
 
