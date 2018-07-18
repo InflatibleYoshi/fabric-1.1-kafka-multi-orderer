@@ -21,7 +21,8 @@ for i in range(arg1):
 for i in range(arg1):
     PEERADMINCARD += 'sed -i -e "s/$HOST' + str(i+2) + '/{IP-HOST-' + str(i+2) + '}/g" ../createPeerAdminCard.sh\n'
 
-file = """cd "$(dirname "$0")"
+file = """#!/bin/bash
+cd "$(dirname "$0")"
 HOST1=
 """ + HOSTS + """
 sed -i -e "s/$HOST1/{IP-HOST-1}/g" configtx.yaml
