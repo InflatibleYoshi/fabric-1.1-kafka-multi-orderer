@@ -40,6 +40,7 @@ Organizations:
         Name: Org1
         ID: Org1MSP
         MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
+        AdminPrincipal: Role.MEMBER
         AnchorPeers:
             - Host: peer0.org1.example.com
               Port: 7051
