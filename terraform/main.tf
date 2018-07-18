@@ -14,33 +14,60 @@ resource "aws_key_pair" "auth" {
 
 resource "aws_efs_file_system" "blockchain-data" {}
 
+resource "aws_efs_mount_target" "multi-machine-HLF11" {
+  ip_address      = "192.168.1.240"
+  file_system_id  = "${aws_efs_file_system.blockchain-data.id}"
+  subnet_id       = "${aws_subnet.fabric-subnet.id}"
+  security_groups = ["${aws_security_group.allow_http.id}"]
+  depends_on      = ["aws_efs_file_system.blockchain-data"]
+}
+
 resource "aws_instance" "fabric" {
   count                  = 1
-  private_ip             = "192.168.1.1"
-  ami                    = "ami-fdd0ee82"
+  availability_zone      = "us-east-1a"
+  private_ip             = "192.168.1.5"
+  ami                    = "ami-69043c16"
   instance_type          = "t2.large"
   key_name               = "default"
   subnet_id              = "${aws_subnet.fabric-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.allow_http.id}"]
 
-  provisioner "local-exec" {
-    command = "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${blockchain-data.dns_name}:/  ~/blockchain-data"
+  provisioner "remote-exec" {
+    inline = [
+      "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/multi-machine-HLF11",
+      "sudo git clone https://github.com/jean507/multi-machine-HLF11",
+      "cd multi-machine-HLF11",
+      "python start.py",
+    ]
+
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+    }
   }
 
-  depends_on = ["aws_efs_file_system.blockchain-data"]
+  depends_on = ["aws_efs_mount_target.multi-machine-HLF11"]
 }
 
 resource "aws_instance" "fabric-peers" {
   count                  = 1
-  private_ip             = "192.168.1-${count.index + 1}"
-  ami                    = "ami-fdd0ee82"
+  availability_zone      = "us-east-1a"
+  private_ip             = "192.168.1.${count.index + 6}"
+  ami                    = "ami-69043c16"
   instance_type          = "t2.large"
   key_name               = "default"
   subnet_id              = "${aws_subnet.fabric-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.allow_http.id}"]
 
-  provisioner "local-exec" {
-    command = "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${blockchain-data.dns_name}:/  ~/blockchain-data"
+  provisioner "remote-exec" {
+    inline = [
+      "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/multi-machine-HLF11",
+    ]
+
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+    }
   }
 
   depends_on = ["aws_instance.fabric"]
