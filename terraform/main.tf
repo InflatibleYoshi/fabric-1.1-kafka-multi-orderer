@@ -2,13 +2,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-variable "instance_ips" {
-  default = {
-    "0" = "192.168.1.222"
-    "1" = "192.168.1.224"
-  }
-}
-
 variable "public_key_path" {
   description = "Enter the path to the SSH Public Key to add to AWS."
   default     = "~/.ssh/id_rsa.pub"
@@ -19,24 +12,38 @@ resource "aws_key_pair" "auth" {
   public_key = "${file(var.public_key_path)}"
 }
 
+resource "aws_efs_file_system" "blockchain-data" {}
+
 resource "aws_instance" "fabric" {
   count                  = 1
   private_ip             = "192.168.1.1"
-  ami                    = "ami-17f6ab68"
+  ami                    = "ami-fdd0ee82"
   instance_type          = "t2.large"
   key_name               = "default"
   subnet_id              = "${aws_subnet.fabric-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.allow_http.id}"]
+
+  provisioner "local-exec" {
+    command = "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${blockchain-data.dns_name}:/  ~/blockchain-data"
+  }
+
+  depends_on = ["aws_efs_file_system.blockchain-data"]
 }
 
 resource "aws_instance" "fabric-peers" {
   count                  = 1
   private_ip             = "192.168.1-${count.index + 1}"
-  ami                    = "ami-17f6ab68"
+  ami                    = "ami-fdd0ee82"
   instance_type          = "t2.large"
   key_name               = "default"
   subnet_id              = "${aws_subnet.fabric-subnet.id}"
   vpc_security_group_ids = ["${aws_security_group.allow_http.id}"]
+
+  provisioner "local-exec" {
+    command = "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${blockchain-data.dns_name}:/  ~/blockchain-data"
+  }
+
+  depends_on = ["aws_instance.fabric"]
 }
 
 resource "aws_vpc" "fabric-vpc" {
