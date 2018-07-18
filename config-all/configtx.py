@@ -35,6 +35,7 @@ Organizations:
         Name: OrdererOrg
         ID: OrdererMSP
         MSPDir: crypto-config/ordererOrganizations/example.com/msp
+        AdminPrincipal: Role.MEMBER
     - &Org1
         Name: Org1
         ID: Org1MSP

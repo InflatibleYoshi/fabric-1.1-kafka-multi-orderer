@@ -40,19 +40,21 @@ resource "aws_instance" "fabric" {
     inline = [
       "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/fabric-1.1-kafka-multi-orderer",
       "sudo chown -R ubuntu fabric-1.1-kafka-multi-orderer",
+      "source .profile",
       "git clone https://github.com/InflatibleYoshi/fabric-1.1-kafka-multi-orderer",
       "cd fabric-1.1-kafka-multi-orderer",
       "python start.py ${var.n} terraform",
-      "cd composer",
-      "chmod +x ./howtobuild.sh",
-      "./howtobuild.sh",
-      "cd ..",
-      "sudo chown -R ubuntu ../",
-      "./startFabric.sh",
-      "chmod +x createPeerAdminCard.sh",
-      "./createPeerAdminCard.sh",
-      "composer-playground",
     ]
+
+    # "cd composer",
+    # "chmod +x ./howtobuild.sh",
+    # "/howtobuild.sh",
+    # "cd ..",
+    # "sudo chown -R ubuntu ../",
+    # "/startFabric.sh",
+    # "chmod +x createPeerAdminCard.sh",
+    # "/createPeerAdminCard.sh",
+    # "composer-playground",
 
     connection {
       type = "ssh"
@@ -77,13 +79,15 @@ resource "aws_instance" "fabric-peers" {
     inline = [
       "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/fabric-1.1-kafka-multi-orderer",
       "sudo chown -R ubuntu fabric-1.1-kafka-multi-orderer",
-      "cd fabric-1.1-kafka-multi-orderer",
-      "chmod +x startFabric-Peer${count.index + 2}.sh",
-      "./startFabric-Peer${count.index + 2}.sh",
-      "chmod +x createPeerAdminCard.sh",
-      "./createPeerAdminCard.sh",
-      "composer-playground",
     ]
+
+    # "source .profile",
+    # "cd fabric-1.1-kafka-multi-orderer",
+    # "chmod +x startFabric-Peer${count.index + 2}.sh",
+    # "/startFabric-Peer${count.index + 2}.sh",
+    # "chmod +x createPeerAdminCard.sh",
+    # "/createPeerAdminCard.sh",
+    # "composer-playground",
 
     connection {
       type = "ssh"
