@@ -37,7 +37,13 @@ resource "aws_instance" "fabric" {
       "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/multi-machine-HLF11",
       "sudo git clone https://github.com/jean507/multi-machine-HLF11",
       "cd multi-machine-HLF11",
-      "python start.py",
+      "python start.py ${aws_instance.fabric-peers.count + 1} terraform",
+      "cd composer",
+      "./howtobuild.sh",
+      "cd ..",
+      "./startFabric.sh",
+      "./createPeerAdminCard.sh",
+      "composer-playground",
     ]
 
     connection {
@@ -62,6 +68,10 @@ resource "aws_instance" "fabric-peers" {
   provisioner "remote-exec" {
     inline = [
       "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/multi-machine-HLF11",
+      "cd multi-machine-HLF11",
+      "./startFabric-Peer${count.index + 2}.sh",
+      "./createPeerAdminCard.sh",
+      "composer-playground",
     ]
 
     connection {
