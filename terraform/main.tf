@@ -2,6 +2,10 @@ provider "aws" {
   region = "us-east-1"
 }
 
+variable "n" {
+  default = 2
+}
+
 variable "public_key_path" {
   description = "Enter the path to the SSH Public Key to add to AWS."
   default     = "~/.ssh/id_rsa.pub"
@@ -37,7 +41,7 @@ resource "aws_instance" "fabric" {
       "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 192.168.1.240:/ /home/ubuntu/multi-machine-HLF11",
       "sudo git clone https://github.com/jean507/multi-machine-HLF11",
       "cd multi-machine-HLF11",
-      "python start.py ${aws_instance.fabric-peers.count + 1} terraform",
+      "python start.py ${var.n} terraform",
       "cd composer",
       "./howtobuild.sh",
       "cd ..",
@@ -56,7 +60,7 @@ resource "aws_instance" "fabric" {
 }
 
 resource "aws_instance" "fabric-peers" {
-  count                  = 1
+  count                  = "${var.n - 1}"
   availability_zone      = "us-east-1a"
   private_ip             = "192.168.1.${count.index + 6}"
   ami                    = "ami-69043c16"
