@@ -42,11 +42,21 @@ for i in range(arg1):
 ORDERERCONFIG = ORDERERCONFIG[:-2]
 
 for i in range(arg1):
-    for j in range(arg1):
-        PEERCONFIG += '        "peer' + str((i*2) + j + 2) + """.org1.example.com":{ 
-            "url": "grpcs://{IP-HOST-""" + str(i + 2) + """}:7050",
+    PEERCONFIG += '        "peer' + str((i*2) + 2) + """.org1.example.com":{ 
+            "url": "grpcs://{IP-HOST-""" + str(i + 2) + """}:9051",
+            "eventUrl": "grpcs://{IP-HOST-""" + str(i + 2) + """}:9053",
             "grpcOptions": {
-                "ssl-target-name-override": "peer""" + str((i*2) + j + 2) + """.org1.example.com"
+                "ssl-target-name-override": "peer""" + str((i*2) + 2) + """.org1.example.com"
+            },
+            "tlsCACerts": {
+                "pem": "${ORG1CA}"
+            }
+        },
+        "peer""" + str((i*2) + 3) + """.org1.example.com":{ 
+            "url": "grpcs://{IP-HOST-""" + str(i + 2) + """}:10051",
+            "eventUrl": "grpcs://{IP-HOST-""" + str(i + 2) + """}:10053",
+            "grpcOptions": {
+                "ssl-target-name-override": "peer""" + str((i*2) + 3) + """.org1.example.com"
             },
             "tlsCACerts": {
                 "pem": "${ORG1CA}"
@@ -162,7 +172,7 @@ cat << EOF > connection.json
             "mspid": "Org1MSP",
             "peers": [
                 "peer0.org1.example.com",
-                "peer1.org1.example.com",      
+                "peer1.org1.example.com",
 """ + ORGPEERS + """
             ],
             "certificateAuthorities": [
