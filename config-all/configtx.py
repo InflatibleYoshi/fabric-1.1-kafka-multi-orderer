@@ -57,10 +57,8 @@ Orderer: &OrdererDefaults
         PreferredMaxBytes: 512 KB
     Kafka:
         Brokers:
-            - kafka0:9092
-            - kafka1:9092
-            - kafka2:9092
-            - kafka3:9092
+            - {IP-HOST-1}:9092
+            - {IP-HOST-1}:10092
     Organizations:
 
 Application: &ApplicationDefaults

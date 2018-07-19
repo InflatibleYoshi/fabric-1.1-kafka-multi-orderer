@@ -7,6 +7,7 @@ arg1 = int(arg1)
 HOSTS = ""
 CONFIGTX = ""
 CRYPTOCONFIG  = ""
+PEERNUMBER = ""
 PEERADMINCARD = ""
 arg1 -= 1
 for i in range(arg1):
@@ -17,6 +18,9 @@ for i in range(arg1):
 
 for i in range(arg1):
     CRYPTOCONFIG += 'sed -i -e "s/{IP-HOST-' + str(i+2) + '}/$HOST' + str(i+2) + '/g" crypto-config.yaml\n'
+
+for i in range(arg1):
+    PEERNUMBER += 'sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose-peer' + str(i+2) + '.yaml\n'
 
 for i in range(arg1):
     PEERADMINCARD += 'sed -i -e "s/{IP-HOST-' + str(i+2) + '}/$HOST' + str(i+2) + '/g" ../createPeerAdminCard.sh\n'
@@ -30,7 +34,7 @@ sed -i -e "s/{IP-HOST-1}/$HOST1/g" configtx.yaml
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" crypto-config.yaml
 """ + CRYPTOCONFIG + """
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose.yml
-sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose-peer2.yml
+""" + PEERNUMBER + """
 sed -i -e "s/{IP-HOST-1}/$HOST1/g" ../createPeerAdminCard.sh
 """ + PEERADMINCARD + """
 
