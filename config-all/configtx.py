@@ -59,6 +59,8 @@ Orderer: &OrdererDefaults
         Brokers:
             - {IP-HOST-1}:9092
             - {IP-HOST-1}:10092
+            - {IP-HOST-1}:11092
+            - {IP-HOST-1}:12092
     Organizations:
 
 Application: &ApplicationDefaults
