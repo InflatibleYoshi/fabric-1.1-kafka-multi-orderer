@@ -27,7 +27,7 @@ services:
       - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
       - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
       - ORDERER_KAFKA_VERBOSE=true
-      - CONFIGTX_ORDERER_KAFKA_BROKERS=[{IP-HOST-""" + str(i + 2) + """}:9092, {IP-HOST-""" + str(i + 2) + """}:10092]
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[{IP-HOST-""" + str(i + 2) + """}:9092, {IP-HOST-""" + str(i + 2) + """}:10092, {IP-HOST-""" + str(i + 2) + """}:11092, {IP-HOST-""" + str(i + 2) + """}:12092]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: orderer
     ports:
@@ -140,7 +140,6 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -158,7 +157,6 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -176,7 +174,6 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -194,7 +191,6 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
