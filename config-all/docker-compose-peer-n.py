@@ -134,12 +134,13 @@ services:
     environment:
       DB_URL: http://localhost:8984/member_db
 
-  kafka0:
-    container_name: kafka0
-    image: wurstmeister/kafka:latest
-    # image: hyperledger/fabric-kafka
+  kafka""" + str(4*i + 4) + """:
+    container_name: kafka""" + str(4*i + 4) + """
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 4) + """
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=true
@@ -151,12 +152,13 @@ services:
     ports:
       - 9092:9092
 
-  kafka1:
-    container_name: kafka1
-    image: wurstmeister/kafka:latest
-    # image: hyperledger/fabric-kafka
+  kafka""" + str(4*i + 5) + """:
+    container_name: kafka""" + str(4*i + 5) + """
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 5) + """
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=true
@@ -168,12 +170,13 @@ services:
     ports:
       - 10092:9092
 
-  kafka2:
-    container_name: kafka2
-    image: wurstmeister/kafka:latest
-    # image: hyperledger/fabric-kafka
+  kafka""" + str(4*i + 6) + """:
+    container_name: kafka""" + str(4*i + 6) + """
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 6) + """
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=true
@@ -185,12 +188,13 @@ services:
     ports:
       - 11092:9092
 
-  kafka3:
-    container_name: kafka3
-    image: wurstmeister/kafka:latest
-    # image: hyperledger/fabric-kafka
+  kafka""" + str(4*i + 7) + """:
+    container_name: kafka""" + str(4*i + 7) + """
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 7) + """
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=true
