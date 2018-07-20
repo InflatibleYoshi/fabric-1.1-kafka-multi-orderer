@@ -27,7 +27,7 @@ services:
       - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
       - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
       - ORDERER_KAFKA_VERBOSE=true
-      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092, kafka1:9092, kafka2:9092, kafka3:9092]
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[{IP-HOST-""" + str(i + 2) + """}:9092, {IP-HOST-""" + str(i + 2) + """}:10092, {IP-HOST-""" + str(i + 2) + """}:11092, {IP-HOST-""" + str(i + 2) + """}:12092]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: orderer
     ports:
@@ -149,7 +149,7 @@ services:
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-      - 9092
+      - 9092:9092
 
   kafka1:
     container_name: kafka1
@@ -166,7 +166,7 @@ services:
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-     - 9092
+      - 10092:9092
 
   kafka2:
     container_name: kafka2
@@ -183,7 +183,7 @@ services:
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-      - 9092
+      - 11092:9092
 
   kafka3:
     container_name: kafka3
@@ -200,7 +200,7 @@ services:
       - KAFKA_LOG_RETENTION_MS=-1
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-1}:2181,{IP-HOST-1}:3181,{IP-HOST-1}:4181
     ports:
-      - 9092
+      - 12092:9092
     """
     text_file = open("composer/docker-compose-peer" + str(i + 2) + ".yml", "w")
     text_file.write(file)
