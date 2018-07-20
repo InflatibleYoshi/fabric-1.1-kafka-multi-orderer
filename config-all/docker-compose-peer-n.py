@@ -167,7 +167,7 @@ services:
       - 10092:9092
 
   kafka2:
-    container_name: kafka1
+    container_name: kafka2
     # image: wurstmeister/kafka:latest
     image: hyperledger/fabric-kafka
     restart: always
@@ -183,8 +183,8 @@ services:
     ports:
       - 11092:9092
 
-  kafka4:
-    container_name: kafka1
+  kafka3:
+    container_name: kafka3
     # image: wurstmeister/kafka:latest
     image: hyperledger/fabric-kafka
     restart: always
