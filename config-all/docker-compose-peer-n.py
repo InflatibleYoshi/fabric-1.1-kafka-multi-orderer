@@ -136,8 +136,8 @@ services:
 
   kafka0:
     container_name: kafka0
-    # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: wurstmeister/kafka:latest
+    # image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -153,8 +153,8 @@ services:
 
   kafka1:
     container_name: kafka1
-    # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: wurstmeister/kafka:latest
+    # image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -170,8 +170,8 @@ services:
 
   kafka2:
     container_name: kafka2
-    # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: wurstmeister/kafka:latest
+    # image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -187,8 +187,8 @@ services:
 
   kafka3:
     container_name: kafka3
-    # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: wurstmeister/kafka:latest
+    # image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
