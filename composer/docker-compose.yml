@@ -190,7 +190,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka0
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-1}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -212,7 +212,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka1
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-1}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -234,7 +234,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka2
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-1}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -256,7 +256,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka3
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-1}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false

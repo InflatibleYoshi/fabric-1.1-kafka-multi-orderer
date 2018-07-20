@@ -37,10 +37,10 @@ services:
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i + 1) + """.example.com/msp:/etc/hyperledger/msp/orderer/msp
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i + 1) + """.example.com/tls:/etc/hyperledger/tls/orderer/tls
     depends_on:
-      - kafka0
-      - kafka1
-      - kafka2
-      - kafka3
+      - kafka""" + str(4*i + 4) + """
+      - kafka""" + str(4*i + 5) + """
+      - kafka""" + str(4*i + 6) + """
+      - kafka""" + str(4*i + 7) + """
 
   peer""" + str(2 + (i*2)) + """.org1.example.com:
     container_name: peer""" + str(2 + (i*2)) + """.org1.example.com
@@ -140,7 +140,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 4) + """
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -158,7 +158,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 5) + """
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -176,7 +176,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 6) + """
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -194,7 +194,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka""" + str(4*i + 7) + """
+      - KAFKA_ADVERTISED_HOST_NAME={IP-HOST-""" + str(i + 2) + """}
       - KAFKA_MESSAGE_MAX_BYTES=103809024
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
