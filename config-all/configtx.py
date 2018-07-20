@@ -18,8 +18,6 @@ for i in range(arg1):
 for i in range(arg1):
     kafka += '            - {IP-HOST-' + str( (i+2)) + "}:9092\n"
     kafka += '            - {IP-HOST-' + str( (i+2)) + "}:10092\n"
-    kafka += '            - {IP-HOST-' + str( (i+2)) + "}:11092\n"
-    kafka += '            - {IP-HOST-' + str( (i+2)) + "}:12092\n"
 
 file = """Profiles:
     ComposerOrdererGenesis:
