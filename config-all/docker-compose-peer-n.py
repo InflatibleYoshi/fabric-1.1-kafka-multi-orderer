@@ -39,6 +39,8 @@ services:
     depends_on:
       - kafka0
       - kafka1
+      - kafka2
+      - kafka3
 
   peer""" + str(2 + (i*2)) + """.org1.example.com:
     container_name: peer""" + str(2 + (i*2)) + """.org1.example.com
