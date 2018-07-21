@@ -1,5 +1,14 @@
 # Terraform install
 
+Before you begin the install, make sure you have terraform installed on your computer and your AWS certificates are in the default location according to your OS: (Linux: ~/.aws/credentials). They should be in this form:
+```
+[default]
+aws_access_key_id = {YOUR ID}
+aws_secret_access_key = {YOUR KEY}
+```
+
+Edit the number of peers in main.tf to your desire and ensure that you are using the correct ssh key.
+
 ```
 terraform init
 terraform plan
