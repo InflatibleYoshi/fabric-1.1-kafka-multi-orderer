@@ -9,7 +9,7 @@ PeerSANS  = ""
 arg1 -= 1
 for i in range(arg1):
     OrdererSANS += '      - Hostname: orderer' + str( (i+1)) + '\n'
-    OrdererSANS += '      - SANS:\n'
+    OrdererSANS += '        SANS:\n'
     OrdererSANS += '          - {IP-HOST-' + str( (i+2)) + '}\n'
 
 for i in range(arg1):
