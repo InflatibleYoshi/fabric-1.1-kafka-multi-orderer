@@ -10,7 +10,7 @@ for i in range(arg1):
     
 file = """
 # Create the channel
-docker exec peer0.org1.example.com peer channel create -c composerchannel --tls -f /etc/hyperledger/configtx/composer-channel.tx""" + ORDER66 + """
+docker exec peer0.org1.example.com peer channel create -c composerchannel --tls -f /etc/hyperledger/configtx/composer-channel.tx """ + ORDER66 + """
 
 echo ${FABRIC_START_TIMEOUT}
 sleep ${FABRIC_START_TIMEOUT}
