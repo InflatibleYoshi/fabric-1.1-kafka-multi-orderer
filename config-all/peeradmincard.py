@@ -12,49 +12,49 @@ ORDERERCONFIG = ""
 PEERCONFIG = ""
 
 for i in range(arg1):
-    ORDERERCA += """ORDERER""" + str(i+1) + """CA="$(awk 'NF {sub(/\\r/, ""); printf "%s\\\\n",$0;}' composer/crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i + 1) + '.example.com/tls/ca.crt)"\n'
+    ORDERERCA += """ORDERER""" + str(i) + """CA="$(awk 'NF {sub(/\\r/, ""); printf "%s\\\\n",$0;}' composer/crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i) + '.example.com/tls/ca.crt)"\n'
 for i in range(arg1):
-    ORDERERS += '                "orderer' + str(i + 1) + '.example.com",\n'
+    ORDERERS += '                "orderer' + str(i) + '.example.com",\n'
 ORDERERS = ORDERERS[:-2]
 for i in range(arg1 * 2):
-    PEERS += '                "peer' + str(i + 2) + """.org1.example.com": {
+    PEERS += '                "peer' + str(i) + """.org1.example.com": {
                     "endorsingPeer": true,
                     "chaincodeQuery": true,
                     "eventSource": true
                 },\n"""
 PEERS = PEERS[:-2]
 for i in range(arg1 * 2):
-    ORGPEERS += '                "peer' + str(i + 2) + '.org1.example.com",\n'
+    ORGPEERS += '                "peer' + str(i) + '.org1.example.com",\n'
 ORGPEERS = ORGPEERS[:-2]
 
 for i in range(arg1):
-    ORDERERCONFIG += '        "orderer' + str(i + 1) + """.example.com":{ 
-            "url": "grpcs://{IP-HOST-""" + str(i + 2) + """}:7050",
+    ORDERERCONFIG += '        "orderer' + str(i) + """.example.com":{ 
+            "url": "grpcs://{IP-HOST-""" + str(i + 1) + """}:7050",
             "grpcOptions": {
-                "ssl-target-name-override": "orderer""" + str(i + 1) + """.example.com"
+                "ssl-target-name-override": "orderer""" + str(i) + """.example.com"
             },
             "tlsCACerts": {
-                "pem": "${ORDERER""" + str(i + 1) + """CA}"
+                "pem": "${ORDERER""" + str(i) + """CA}"
             }
         },\n"""
 ORDERERCONFIG = ORDERERCONFIG[:-2]
 
 for i in range(arg1):
-    PEERCONFIG += '        "peer' + str((i*2) + 2) + """.org1.example.com":{ 
-            "url": "grpcs://{IP-HOST-""" + str(i + 2) + """}:9051",
-            "eventUrl": "grpcs://{IP-HOST-""" + str(i + 2) + """}:9053",
+    PEERCONFIG += '        "peer' + str(i*2) + """.org1.example.com":{ 
+            "url": "grpcs://{IP-HOST-""" + str(i + 1) + """}:9051",
+            "eventUrl": "grpcs://{IP-HOST-""" + str(i + 1) + """}:9053",
             "grpcOptions": {
-                "ssl-target-name-override": "peer""" + str((i*2) + 2) + """.org1.example.com"
+                "ssl-target-name-override": "peer""" + str(i*2) + """.org1.example.com"
             },
             "tlsCACerts": {
                 "pem": "${ORG1CA}"
             }
         },
-        "peer""" + str((i*2) + 3) + """.org1.example.com":{ 
-            "url": "grpcs://{IP-HOST-""" + str(i + 2) + """}:10051",
-            "eventUrl": "grpcs://{IP-HOST-""" + str(i + 2) + """}:10053",
+        "peer""" + str((i*2) + 1) + """.org1.example.com":{ 
+            "url": "grpcs://{IP-HOST-""" + str(i + 1) + """}:10051",
+            "eventUrl": "grpcs://{IP-HOST-""" + str(i + 1) + """}:10053",
             "grpcOptions": {
-                "ssl-target-name-override": "peer""" + str((i*2) + 3) + """.org1.example.com"
+                "ssl-target-name-override": "peer""" + str((i*2) + 1) + """.org1.example.com"
             },
             "tlsCACerts": {
                 "pem": "${ORG1CA}"
