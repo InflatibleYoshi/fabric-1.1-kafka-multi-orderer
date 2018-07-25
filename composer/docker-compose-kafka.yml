@@ -3,7 +3,7 @@ services:
   zookeeper0:
     container_name: zookeeper0
   # image: tmeister/zookeeper:latest
-    image: hyperledger/fabric-zookeeper
+    image: hyperledger/fabric-zookeeper:$ARCH-0.4.6
     restart: always
     environment:
       - ZOO_MY_ID=1
@@ -16,7 +16,7 @@ services:
   zookeeper1:
     container_name: zookeeper1
   # image: tmeister/zookeeper:latest
-    image: hyperledger/fabric-zookeeper
+    image: hyperledger/fabric-zookeeper:$ARCH-0.4.6
     restart: always
     environment:
       - ZOO_MY_ID=2
@@ -29,7 +29,7 @@ services:
   zookeeper2:
     container_name: zookeeper2
   # image: tmeister/zookeeper:latest
-    image: hyperledger/fabric-zookeeper
+    image: hyperledger/fabric-zookeeper:$ARCH-0.4.6
     restart: always
     environment:
       - ZOO_MY_ID=3
@@ -42,7 +42,7 @@ services:
   kafka0:
     container_name: kafka0
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -63,7 +63,7 @@ services:
   kafka1:
     container_name: kafka1
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -84,7 +84,7 @@ services:
   kafka2:
     container_name: kafka2
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -105,7 +105,7 @@ services:
   kafka3:
     container_name: kafka3
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
