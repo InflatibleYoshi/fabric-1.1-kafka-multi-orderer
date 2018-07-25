@@ -101,7 +101,16 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/peer/msp
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/peer/tls
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
-""" + ORDERERVOLUME
+""" + ORDERERVOLUME + """
+  couchdb:
+    container_name: couchdb
+    image: hyperledger/fabric-couchdb:$ARCH-0.4.6
+    ports:
+      - 5984:5984
+    environment:
+      DB_URL: http://localhost:5984/member_db
+
+"""
 
 text_file = open("composer/docker-compose.yml", "w")
 text_file.write(file)
