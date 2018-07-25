@@ -43,6 +43,7 @@ resource "aws_instance" "fabric" {
       "source .profile",
       "git clone https://github.com/InflatibleYoshi/fabric-1.1-kafka-multi-orderer",
       "cd fabric-1.1-kafka-multi-orderer",
+      "git checkout newformat",
       "python start.py ${var.n} terraform",
     ]
 
