@@ -19,7 +19,7 @@ for i in range(arg1):
     CRYPTOCONFIG += 'sed -i -e "s/{IP-HOST-' + str(i+1) + '}/$HOST' + str(i+1) + '/g" crypto-config.yaml\n'
 
 for i in range(arg1):
-    PEERNUMBER += 'sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose-peer' + str(i+1) + '.yml\n'
+    PEERNUMBER += 'sed -i -e "s/{IP-HOST-0}/$HOST0/g" docker-compose-peer' + str(i+1) + '.yml\n'
     PEERNUMBER += 'sed -i -e "s/{IP-HOST-' + str(i+1) + '}/$HOST' + str(i+1) + '/g" docker-compose-peer' + str(i+1) + '.yml\n'
 
 for i in range(arg1):

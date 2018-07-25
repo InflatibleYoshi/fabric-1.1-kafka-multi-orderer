@@ -11,8 +11,6 @@ ORGPEERS = ""
 ORDERERCONFIG = ""
 PEERCONFIG = ""
 
-arg1 -= 1
-
 for i in range(arg1):
     ORDERERCA += """ORDERER""" + str(i+1) + """CA="$(awk 'NF {sub(/\\r/, ""); printf "%s\\\\n",$0;}' composer/crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i + 1) + '.example.com/tls/ca.crt)"\n'
 for i in range(arg1):
@@ -74,7 +72,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Grab the file names of the keystore keys
 ORG1KEY="$(ls composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/)"
-ORDERER0CA="$(awk 'NF {sub(/\\r/, ""); printf "%s\\\\n",$0;}' composer/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/ca.crt)"
 """ + ORDERERCA + """
 ORG1CA="$(awk 'NF {sub(/\\r/, ""); printf "%s\\\\n",$0;}' composer/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt)"
 
