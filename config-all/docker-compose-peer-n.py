@@ -36,6 +36,11 @@ services:
         - ./:/etc/hyperledger/configtx
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i + 1) + """.example.com/msp:/etc/hyperledger/msp/orderer/msp
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i + 1) + """.example.com/tls:/etc/hyperledger/tls/orderer/tls
+    depends_on:
+      - kafka""" + str(4*i + 4) + """
+      - kafka""" + str(4*i + 5) + """
+      - kafka""" + str(4*i + 6) + """
+      - kafka""" + str(4*i + 7) + """
 
   peer""" + str(2 + (i*2)) + """.org1.example.com:
     container_name: peer""" + str(2 + (i*2)) + """.org1.example.com
@@ -128,18 +133,11 @@ services:
       - 8984:5984
     environment:
       DB_URL: http://localhost:8984/member_db
-    """
-    text_file = open("composer/docker-compose-peer" + str(i + 2) + ".yml", "w")
-    text_file.write(file)
-    text_file.close()
 
-    kafka = """version: '2'
-
-services:
   kafka""" + str(4*i + 4) + """:
     container_name: kafka""" + str(4*i + 4) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -156,7 +154,7 @@ services:
   kafka""" + str(4*i + 5) + """:
     container_name: kafka""" + str(4*i + 5) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -173,7 +171,7 @@ services:
   kafka""" + str(4*i + 6) + """:
     container_name: kafka""" + str(4*i + 6) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -190,7 +188,7 @@ services:
   kafka""" + str(4*i + 7) + """:
     container_name: kafka""" + str(4*i + 7) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    image: hyperledger/fabric-kafka
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -204,7 +202,8 @@ services:
     ports:
       - 12092:9092
     """
-    text_file = open("composer/docker-compose-kafka-peer" + str(i + 2) + ".yml", "w")
-    text_file.write(kafka)
+    text_file = open("composer/docker-compose-peer" + str(i + 2) + ".yml", "w")
+    text_file.write(file)
     text_file.close()
+
 

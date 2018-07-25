@@ -1,5 +1,5 @@
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
 terraform/.terraform/plugins/linux_amd64/lock.json
+terraform/.terraform/plugins/linux_amd64/terraform-provider-aws_v1.27.0_x4
 terraform/.terraform.tfstate.lock.info
-terraform/.terraform/plugins/linux_amd64/terraform-provider-aws_v1.28.0_x4
