@@ -8,7 +8,7 @@ anchorPeers = ""
 orderers  = ""
 kafka = ""
 for i in range(arg1):
-    anchorPeers += "            - Host: peer" + str( 2*i ) + ".org1.example.com\n"
+    anchorPeers += "            - Host: peer" + str( (2*i) + 1 ) + ".org1.example.com\n"
     anchorPeers += "            - Port: 9051\n"
 
 for i in range(arg1):

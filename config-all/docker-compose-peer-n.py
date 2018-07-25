@@ -41,22 +41,22 @@ services:
       - kafka""" + str(4*i + 2) + """
       - kafka""" + str(4*i + 3) + """
 
-  peer""" + str(i*2) + """.org1.example.com:
-    container_name: peer""" + str(i*2) + """.org1.example.com
+  peer""" + str((i*2) + 1) + """.org1.example.com:
+    container_name: peer""" + str((i*2) + 1) + """.org1.example.com
     image: hyperledger/fabric-peer:$ARCH-1.1.0
     environment:
       - CORE_LOGGING_PEER=debug
       - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_PEER_ID=peer""" + str(i*2) + """.org1.example.com
-      - CORE_PEER_ADDRESS=peer""" + str(i*2) + """.org1.example.com:7051
+      - CORE_PEER_ID=peer""" + str((i*2) + 1) + """.org1.example.com
+      - CORE_PEER_ADDRESS=peer""" + str((i*2) + 1) + """.org1.example.com:7051
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=composer_default
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb""" + str(i*2) + """:5984
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer""" + str(i*2) + """.org1.example.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer""" + str(i*2) + """.org1.example.com:7051
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb""" + str((i*2) + 1) + """:5984
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer""" + str((i*2) + 1) + """.org1.example.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer""" + str((i*2) + 1) + """.org1.example.com:7051
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_GOSSIP_USELEADERELECTION=true
       - CORE_PEER_GOSSIP_ORGLEADER=false
@@ -72,37 +72,37 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./:/etc/hyperledger/configtx
-        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str(i*2) + """.org1.example.com/msp:/etc/hyperledger/peer/msp
-        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str(i*2) + """.org1.example.com/tls:/etc/hyperledger/peer/tls
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str((i*2) + 1) + """.org1.example.com/msp:/etc/hyperledger/peer/msp
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str((i*2) + 1) + """.org1.example.com/tls:/etc/hyperledger/peer/tls
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i) + """.example.com/msp:/etc/hyperledger/msp/orderer/msp
     depends_on:
-      - couchdb""" + str(i*2) + """
+      - couchdb""" + str((i*2) + 1) + """
 
-  couchdb""" + str(i*2) + """:
-    container_name: couchdb""" + str(i*2) + """
+  couchdb""" + str((i*2) + 1) + """:
+    container_name: couchdb""" + str((i*2) + 1) + """
     image: hyperledger/fabric-couchdb:$ARCH-0.4.6
     ports:
       - 7984:5984
     environment:
       DB_URL: http://localhost:7984/member_db
 
-  peer""" + str(1 + (i*2)) + """.org1.example.com:
-    container_name: peer""" + str(1 + (i*2)) + """.org1.example.com
+  peer""" + str(2 + (i*2)) + """.org1.example.com:
+    container_name: peer""" + str(2 + (i*2)) + """.org1.example.com
     image: hyperledger/fabric-peer:$ARCH-1.1.0
     environment:
       - CORE_LOGGING_PEER=debug
       - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_PEER_ID=peer""" + str(1 + (i*2)) + """.org1.example.com
-      - CORE_PEER_ADDRESS=peer""" + str(1 + (i*2)) + """.org1.example.com:7051
+      - CORE_PEER_ID=peer""" + str(2 + (i*2)) + """.org1.example.com
+      - CORE_PEER_ADDRESS=peer""" + str(2 + (i*2)) + """.org1.example.com:7051
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=composer_default
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb""" + str(1 + (i*2)) + """:5984
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer""" + str(1 + (i*2)) + """.org1.example.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer""" + str(i*2) + """.org1.example.com:7051
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb""" + str(2 + (i*2)) + """:5984
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer""" + str(2 + (i*2)) + """.org1.example.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer""" + str((i*2) + 1) + """.org1.example.com:7051
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_GOSSIP_USELEADERELECTION=true
       - CORE_PEER_GOSSIP_ORGLEADER=false
@@ -118,15 +118,15 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./:/etc/hyperledger/configtx
-        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str(1 + (i*2)) + """.org1.example.com/msp:/etc/hyperledger/peer/msp
-        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str(1 + (i*2)) + """.org1.example.com/tls:/etc/hyperledger/peer/tls
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str(2 + (i*2)) + """.org1.example.com/msp:/etc/hyperledger/peer/msp
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer""" + str(2 + (i*2)) + """.org1.example.com/tls:/etc/hyperledger/peer/tls
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer""" + str(i) + """.example.com/msp:/etc/hyperledger/msp/orderer/msp
     depends_on:
-      - couchdb""" + str(1 + (i*2)) + """
+      - couchdb""" + str(2 + (i*2)) + """
 
-  couchdb""" + str(1 + (i*2)) + """:
-    container_name: couchdb""" + str(1 + (i*2)) + """
+  couchdb""" + str(2 + (i*2)) + """:
+    container_name: couchdb""" + str(2 + (i*2)) + """
     image: hyperledger/fabric-couchdb:$ARCH-0.4.6
     ports:
       - 8984:5984
@@ -136,7 +136,7 @@ services:
   kafka""" + str(4*i) + """:
     container_name: kafka""" + str(4*i) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -153,7 +153,7 @@ services:
   kafka""" + str(4*i + 1) + """:
     container_name: kafka""" + str(4*i + 1) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -170,7 +170,7 @@ services:
   kafka""" + str(4*i + 2) + """:
     container_name: kafka""" + str(4*i + 2) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024
@@ -187,7 +187,7 @@ services:
   kafka""" + str(4*i + 3) + """:
     container_name: kafka""" + str(4*i + 3) + """
     # image: wurstmeister/kafka:latest
-    image: hyperledger/fabric-kafka
+    image: hyperledger/fabric-kafka$ARCH-0.4.6
     restart: always
     environment:
       - KAFKA_MESSAGE_MAX_BYTES=103809024

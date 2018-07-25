@@ -67,22 +67,22 @@ services:
       - '2888'
       - '3888'
 
-  root.org1.example.com:
-    container_name: root.org1.example.com
+  peer0.org1.example.com:
+    container_name: peer0.org1.example.com
     image: hyperledger/fabric-peer:$ARCH-1.1.0
     environment:
       - CORE_LOGGING_PEER=debug
       - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_PEER_ID=root.org1.example.com
-      - CORE_PEER_ADDRESS=root.org1.example.com:7051
+      - CORE_PEER_ID=peer0.org1.example.com
+      - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=composer_default
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=root.org1.example.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=root.org1.example.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_GOSSIP_USELEADERELECTION=true
       - CORE_PEER_GOSSIP_ORGLEADER=false
@@ -98,8 +98,8 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./:/etc/hyperledger/configtx
-        - ./crypto-config/peerOrganizations/org1.example.com/peers/root.org1.example.com/msp:/etc/hyperledger/peer/msp
-        - ./crypto-config/peerOrganizations/org1.example.com/peers/root.org1.example.com/tls:/etc/hyperledger/peer/tls
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/peer/msp
+        - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/peer/tls
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
 """ + ORDERERVOLUME
 
