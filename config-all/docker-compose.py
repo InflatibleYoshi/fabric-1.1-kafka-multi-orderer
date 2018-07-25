@@ -4,8 +4,12 @@ from sys import argv
 script, arg1 = argv
 arg1 = int(arg1)
 
+ORDERERVOLUME = ""
+
 for i in range(arg1):
-    file = """version: '2'
+    ORDERERVOLUME += "        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer" + str(i) + ".example.com/msp:/etc/hyperledger/msp/orderer"+ str(i) + "/msp\n"
+
+file = """version: '2'
 
 services:
   ca.org1.example.com:
@@ -97,5 +101,8 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/peers/root.org1.example.com/msp:/etc/hyperledger/peer/msp
         - ./crypto-config/peerOrganizations/org1.example.com/peers/root.org1.example.com/tls:/etc/hyperledger/peer/tls
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
-        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp:/etc/hyperledger/msp/orderer/msp
-"""
+""" + ORDERERVOLUME
+
+text_file = open("composer/docker-compose.yml", "w")
+text_file.write(file)
+text_file.close()
