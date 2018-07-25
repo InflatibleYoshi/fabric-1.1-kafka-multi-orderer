@@ -3,7 +3,7 @@ from sys import argv
 
 script, arg1 = argv
 arg1 = int(arg1)
-
+ORDER66 = ""
 
 for i in range(arg1):
     ORDER66 += "-o orderer" + str(i) + ".example.com:7050 --cafile /etc/hyperledger/msp/orderer" + str(i) + "/msp/tlscacerts/tlsca.example.com-cert.pem "
