@@ -7,31 +7,31 @@ arg1 = int(arg1)
 HOSTS = ""
 CONFIGTX = ""
 CRYPTOCONFIG  = ""
+PEERNUMBER = ""
 PEERADMINCARD = ""
-arg1 -= 1
 for i in range(arg1):
-    HOSTS += 'HOST' + str(i+2) + '=192.168.1.' + str(i+6) + '\n'
+    HOSTS += 'HOST' + str(i+1) + '=192.168.1.' + str(i+5) + '\n'
 
 for i in range(arg1):
-    CONFIGTX += 'sed -i -e "s/{IP-HOST-' + str(i+2) + '}/$HOST' + str(i+2) + '/g" configtx.yaml\n'
+    CONFIGTX += 'sed -i -e "s/{IP-HOST-' + str(i+1) + '}/$HOST' + str(i+1) + '/g" configtx.yaml\n'
 
 for i in range(arg1):
-    CRYPTOCONFIG += 'sed -i -e "s/{IP-HOST-' + str(i+2) + '}/$HOST' + str(i+2) + '/g" crypto-config.yaml\n'
+    CRYPTOCONFIG += 'sed -i -e "s/{IP-HOST-' + str(i+1) + '}/$HOST' + str(i+1) + '/g" crypto-config.yaml\n'
 
 for i in range(arg1):
-    PEERADMINCARD += 'sed -i -e "s/{IP-HOST-' + str(i+2) + '}/$HOST' + str(i+2) + '/g" ../createPeerAdminCard.sh\n'
+    PEERNUMBER += 'sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose-peer' + str(i+1) + '.yml\n'
+    PEERNUMBER += 'sed -i -e "s/{IP-HOST-' + str(i+1) + '}/$HOST' + str(i+1) + '/g" docker-compose-peer' + str(i+1) + '.yml\n'
+
+for i in range(arg1):
+    PEERADMINCARD += 'sed -i -e "s/{IP-HOST-' + str(i+1) + '}/$HOST' + str(i+1) + '/g" ../createPeerAdminCard.sh\n'
 
 file = """#!/bin/bash
 cd "$(dirname "$0")"
-HOST1=192.168.1.5
+HOST0=192.168.1.5
 """ + HOSTS + """
-sed -i -e "s/{IP-HOST-1}/$HOST1/g" configtx.yaml
 """ + CONFIGTX + """
-sed -i -e "s/{IP-HOST-1}/$HOST1/g" crypto-config.yaml
 """ + CRYPTOCONFIG + """
-sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose.yml
-sed -i -e "s/{IP-HOST-1}/$HOST1/g" docker-compose-peer2.yml
-sed -i -e "s/{IP-HOST-1}/$HOST1/g" ../createPeerAdminCard.sh
+""" + PEERNUMBER + """
 """ + PEERADMINCARD + """
 
 cryptogen generate --config=./crypto-config.yaml

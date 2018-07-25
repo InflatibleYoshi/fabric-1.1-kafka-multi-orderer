@@ -66,7 +66,7 @@ resource "aws_instance" "fabric" {
 }
 
 resource "aws_instance" "fabric-peers" {
-  count                  = "${var.n - 1}"
+  count                  = "${var.n}"
   availability_zone      = "us-east-1a"
   private_ip             = "192.168.1.${count.index + 6}"
   ami                    = "ami-a07d46df"

@@ -150,16 +150,10 @@ cat << EOF > connection.json
     "channels": {
         "composerchannel": {
             "orderers": [
-                "orderer0.example.com",
 """ + ORDERERS + """
             ],
             "peers": {
-                "peer0.org1.example.com": {
-                    "endorsingPeer": true,
-                    "chaincodeQuery": true,
-                    "eventSource": true
-                },
-                "peer1.org1.example.com": {
+                "root.org1.example.com": {
                     "endorsingPeer": true,
                     "chaincodeQuery": true,
                     "eventSource": true
@@ -171,8 +165,7 @@ cat << EOF > connection.json
         "Org1": {
             "mspid": "Org1MSP",
             "peers": [
-                "peer0.org1.example.com",
-                "peer1.org1.example.com",
+                "root.org1.example.com",
 """ + ORGPEERS + """
             ],
             "certificateAuthorities": [
@@ -181,33 +174,14 @@ cat << EOF > connection.json
         }
     },
     "orderers": {
-        "orderer0.example.com": {
-            "url": "grpcs://{IP-HOST-1}:7050",
-            "grpcOptions": {
-                "ssl-target-name-override": "orderer0.example.com"
-            },
-            "tlsCACerts": {
-                "pem": "${ORDERER0CA}"
-            }
-        },
 """ + ORDERERCONFIG + """
     },
     "peers": {
-        "peer0.org1.example.com": {
-            "url": "grpcs://{IP-HOST-1}:7051",
-            "eventUrl": "grpcs://{IP-HOST-1}:7053",
+        "root.org1.example.com": {
+            "url": "grpcs://{IP-HOST-0}:7051",
+            "eventUrl": "grpcs://{IP-HOST-0}:7053",
             "grpcOptions": {
-                "ssl-target-name-override": "peer0.org1.example.com"
-            },
-            "tlsCACerts": {
-                "pem": "${ORG1CA}"
-            }
-        },
-        "peer1.org1.example.com": {
-            "url": "grpcs://{IP-HOST-1}:8051",
-            "eventUrl": "grpcs://{IP-HOST-1}:8053",
-            "grpcOptions": {
-                "ssl-target-name-override": "peer1.org1.example.com"
+                "ssl-target-name-override": "root.org1.example.com"
             },
             "tlsCACerts": {
                 "pem": "${ORG1CA}"
@@ -217,7 +191,7 @@ cat << EOF > connection.json
     },
     "certificateAuthorities": {
         "ca.org1.example.com": {
-            "url": "https://{IP-HOST-1}:7054",
+            "url": "https://{IP-HOST-0}:7054",
             "caName": "ca.org1.example.com",
             "httpOptions": {
                 "verify": false

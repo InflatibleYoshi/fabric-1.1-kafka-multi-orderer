@@ -7,19 +7,18 @@ arg1 = int(arg1)
 anchorPeers = ""
 orderers  = ""
 kafka = ""
-arg1 -= 1
 for i in range(arg1):
-    anchorPeers += "            - Host: peer" + str( (i+1) * 2 ) + ".org1.example.com\n"
+    anchorPeers += "            - Host: peer" + str( 2*i ) + ".org1.example.com\n"
     anchorPeers += "            - Port: 9051\n"
 
 for i in range(arg1):
-    orderers += '        - {IP-HOST-' + str( (i+2)) + "}:7050\n"
+    orderers += '        - {IP-HOST-' + str( (i+1)) + "}:7050\n"
 
 for i in range(arg1):
-    kafka += '            - {IP-HOST-' + str( (i+2)) + "}:9092\n"
-    kafka += '            - {IP-HOST-' + str( (i+2)) + "}:10092\n"
-    kafka += '            - {IP-HOST-' + str( (i+2)) + "}:11092\n"
-    kafka += '            - {IP-HOST-' + str( (i+2)) + "}:12092\n"
+    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:9092\n"
+    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:10092\n"
+    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:11092\n"
+    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:12092\n"
 
 file = """Profiles:
     ComposerOrdererGenesis:
@@ -49,13 +48,12 @@ Organizations:
         MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
         AdminPrincipal: Role.MEMBER
         AnchorPeers:
-            - Host: peer0.org1.example.com
+            - Host: root.org1.example.com
               Port: 7051
 """ + anchorPeers + """
 Orderer: &OrdererDefaults
     OrdererType: kafka
     Addresses:
-        - {IP-HOST-1}:7050
 """ + orderers + """
     BatchTimeout: 2s
     BatchSize:
@@ -64,10 +62,6 @@ Orderer: &OrdererDefaults
         PreferredMaxBytes: 512 KB
     Kafka:
         Brokers:
-            - {IP-HOST-1}:9092
-            - {IP-HOST-1}:10092
-            - {IP-HOST-1}:11092
-            - {IP-HOST-1}:12092
 """ + kafka + """
     Organizations:
 
