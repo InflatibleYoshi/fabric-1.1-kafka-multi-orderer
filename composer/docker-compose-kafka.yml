@@ -1,4 +1,6 @@
-zookeeper0:
+version: '2'
+services:
+  zookeeper0:
     container_name: zookeeper0
   # image: tmeister/zookeeper:latest
     image: hyperledger/fabric-zookeeper
