@@ -34,11 +34,7 @@ services:
       - ORDERER_GENERAL_TLS_ROOTCAS=[/etc/hyperledger/tls/orderer/tls/ca.crt]
       - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
       - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
-      - ORDERER_KAFKA_VERBOSE=true    depends_on:
-      - kafka0
-      - kafka1
-      - kafka2
-      - kafka3
+      - ORDERER_KAFKA_VERBOSE=true
       - CONFIGTX_ORDERER_KAFKA_BROKERS=[{IP-HOST-1}:9092, {IP-HOST-1}:10092, {IP-HOST-1}:11092, {IP-HOST-1}:12092]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: orderer
