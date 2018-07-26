@@ -126,6 +126,10 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
     ports:
       - 9092:9092
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
 
   kafka1:
     container_name: kafka1
@@ -143,6 +147,10 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
     ports:
       - 10092:9092
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
 
   kafka2:
     container_name: kafka2
@@ -160,6 +168,10 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
     ports:
       - 11092:9092
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
 
   kafka3:
     container_name: kafka3
@@ -177,6 +189,10 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
     ports:
       - 12092:9092
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
 """
 
 text_file = open("composer/docker-compose.yml", "w")

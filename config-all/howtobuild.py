@@ -28,9 +28,10 @@ file = """#!/bin/bash
 cd "$(dirname "$0")"
 HOST0=
 """ + HOSTS + """
-'sed -i -e "s/{IP-HOST-0}/$HOST0/g" configtx.yaml
+sed -i -e "s/{IP-HOST-0}/$HOST0/g" configtx.yaml
 """ + CONFIGTX + """
 """ + CRYPTOCONFIG + """
+sed -i -e "s/{IP-HOST-0}/$HOST0/g" docker-compose.yml
 """ + PEERNUMBER + """
 """ + PEERADMINCARD + """
 

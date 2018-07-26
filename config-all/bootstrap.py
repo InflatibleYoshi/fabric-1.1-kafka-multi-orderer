@@ -6,11 +6,10 @@ arg1 = int(arg1)
 ORDER66 = ""
 
 for i in range(arg1):
-    ORDER66 += "-o orderer" + str(i) + ".example.com:7050 --cafile /etc/hyperledger/msp/orderer" + str(i) + "/msp/tlscacerts/tlsca.example.com-cert.pem "
+    ORDER66 += "docker exec peer0.org1.example.com peer channel create -c composerchannel --tls -f /etc/hyperledger/configtx/composer-channel.tx -o orderer" + str(i) + ".example.com:7050 --cafile /etc/hyperledger/msp/orderer" + str(i) + "/msp/tlscacerts/tlsca.example.com-cert.pem\n"
     
 file = """
-# Create the channel
-docker exec peer0.org1.example.com peer channel create -c composerchannel --tls -f /etc/hyperledger/configtx/composer-channel.tx """ + ORDER66 + """
+""" + ORDER66 + """
 
 echo ${FABRIC_START_TIMEOUT}
 sleep ${FABRIC_START_TIMEOUT}
