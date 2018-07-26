@@ -9,7 +9,7 @@ orderers  = ""
 kafka = ""
 for i in range(arg1):
     anchorPeers += "            - Host: peer" + str( (2*i) + 1 ) + ".org1.example.com\n"
-    anchorPeers += "            - Port: 9051\n"
+    anchorPeers += "              Port: 9051\n"
 
 for i in range(arg1):
     orderers += '        - {IP-HOST-' + str( (i+1)) + "}:7050\n"
