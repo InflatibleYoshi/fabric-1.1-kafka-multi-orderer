@@ -10,7 +10,7 @@ CRYPTOCONFIG  = ""
 PEERNUMBER = ""
 PEERADMINCARD = ""
 for i in range(arg1):
-    HOSTS += 'HOST' + str(i+1) + '=192.168.1.' + str(i+5) + '\n'
+    HOSTS += 'HOST' + str(i+1) + '=192.168.1.' + str(i+6) + '\n'
 
 for i in range(arg1):
     CONFIGTX += 'sed -i -e "s/{IP-HOST-' + str(i+1) + '}/$HOST' + str(i+1) + '/g" configtx.yaml\n'
