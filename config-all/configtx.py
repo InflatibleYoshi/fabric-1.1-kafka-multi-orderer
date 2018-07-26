@@ -48,7 +48,7 @@ Organizations:
         MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
         AdminPrincipal: Role.MEMBER
         AnchorPeers:
-            - Host: root.org1.example.com
+            - Host: peer0.org1.example.com
               Port: 7051
 """ + anchorPeers + """
 Orderer: &OrdererDefaults

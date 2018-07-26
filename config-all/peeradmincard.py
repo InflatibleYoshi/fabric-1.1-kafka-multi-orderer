@@ -150,7 +150,7 @@ cat << EOF > connection.json
 """ + ORDERERS + """
             ],
             "peers": {
-                "root.org1.example.com": {
+                "peer0.org1.example.com": {
                     "endorsingPeer": true,
                     "chaincodeQuery": true,
                     "eventSource": true
@@ -162,7 +162,7 @@ cat << EOF > connection.json
         "Org1": {
             "mspid": "Org1MSP",
             "peers": [
-                "root.org1.example.com",
+                "peer0.org1.example.com",
 """ + ORGPEERS + """
             ],
             "certificateAuthorities": [
@@ -174,11 +174,11 @@ cat << EOF > connection.json
 """ + ORDERERCONFIG + """
     },
     "peers": {
-        "root.org1.example.com": {
+        "peer0.org1.example.com": {
             "url": "grpcs://{IP-HOST-0}:7051",
             "eventUrl": "grpcs://{IP-HOST-0}:7053",
             "grpcOptions": {
-                "ssl-target-name-override": "root.org1.example.com"
+                "ssl-target-name-override": "peer0.org1.example.com"
             },
             "tlsCACerts": {
                 "pem": "${ORG1CA}"

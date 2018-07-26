@@ -8,7 +8,7 @@ OrdererSANS = ""
 PeerSANS  = ""
 for i in range(arg1):
     OrdererSANS += '      - Hostname: orderer' + str(i) + '\n'
-    OrdererSANS += '      - SANS:\n'
+    OrdererSANS += '        SANS:\n'
     OrdererSANS += '          - {IP-HOST-' + str( (i+1)) + '}\n'
 
 for i in range(arg1):
@@ -18,8 +18,6 @@ file = """OrdererOrgs:
   - Name: Orderer
     Domain: example.com
     Specs:
-      - Hostname: orderer0
-        SANS:
 """ + OrdererSANS + """
 PeerOrgs:
   - Name: Org1
