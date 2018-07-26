@@ -26,7 +26,7 @@ services:
       - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
       - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
       - ORDERER_KAFKA_VERBOSE=true
-      - CONFIGTX_ORDERER_KAFKA_BROKERS=[{IP-HOST-""" + str(i + 1) + """}:9092, {IP-HOST-""" + str(i + 1) + """}:10092, {IP-HOST-""" + str(i + 1) + """}:11092, {IP-HOST-""" + str(i + 1) + """}:12092]
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[{IP-HOST-0}:9092, {IP-HOST-0}:10092, {IP-HOST-0}:11092, {IP-HOST-0}:12092]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
     command: orderer
     ports:
