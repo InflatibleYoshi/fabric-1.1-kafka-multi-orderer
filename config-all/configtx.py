@@ -14,12 +14,6 @@ for i in range(arg1):
 for i in range(arg1):
     orderers += '        - {IP-HOST-' + str( (i+1)) + "}:7050\n"
 
-for i in range(arg1):
-    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:9092\n"
-    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:10092\n"
-    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:11092\n"
-    kafka += '            - {IP-HOST-' + str( (i+1)) + "}:12092\n"
-
 file = """Profiles:
     ComposerOrdererGenesis:
         Orderer:
