@@ -28,6 +28,7 @@ file = """#!/bin/bash
 cd "$(dirname "$0")"
 HOST0=192.168.1.5
 """ + HOSTS + """
+'sed -i -e "s/{IP-HOST-0}/$HOST0/g" configtx.yaml
 """ + CONFIGTX + """
 """ + CRYPTOCONFIG + """
 """ + PEERNUMBER + """
