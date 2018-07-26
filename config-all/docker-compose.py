@@ -109,7 +109,74 @@ services:
       - 5984:5984
     environment:
       DB_URL: http://localhost:5984/member_db
+  
+  kafka0:
+    container_name: kafka0
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    restart: always
+    environment:
+      - KAFKA_MESSAGE_MAX_BYTES=103809024
+      - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 
+      - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
+      - KAFKA_BROKER_ID=0
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_LOG_RETENTION_MS=-1
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
+    ports:
+      - 9092:9092
 
+  kafka1:
+    container_name: kafka1
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    restart: always
+    environment:
+      - KAFKA_MESSAGE_MAX_BYTES=103809024
+      - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
+      - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
+      - KAFKA_BROKER_ID=1
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_LOG_RETENTION_MS=-1
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
+    ports:
+      - 10092:9092
+
+  kafka2:
+    container_name: kafka2
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    restart: always
+    environment:
+      - KAFKA_MESSAGE_MAX_BYTES=103809024
+      - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
+      - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
+      - KAFKA_BROKER_ID=2
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_LOG_RETENTION_MS=-1
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
+    ports:
+      - 11092:9092
+
+  kafka3:
+    container_name: kafka3
+    # image: wurstmeister/kafka:latest
+    image: hyperledger/fabric-kafka:$ARCH-0.4.6
+    restart: always
+    environment:
+      - KAFKA_MESSAGE_MAX_BYTES=103809024
+      - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024
+      - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
+      - KAFKA_BROKER_ID=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_LOG_RETENTION_MS=-1
+      - KAFKA_ZOOKEEPER_CONNECT={IP-HOST-0}:2181,{IP-HOST-0}:3181,{IP-HOST-0}:4181
+    ports:
+      - 12092:9092
 """
 
 text_file = open("composer/docker-compose.yml", "w")
