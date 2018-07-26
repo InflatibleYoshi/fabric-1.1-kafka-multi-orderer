@@ -17,7 +17,7 @@ for i in range(arg1):
     ORDERERS += '                "orderer' + str(i) + '.example.com",\n'
 ORDERERS = ORDERERS[:-2]
 for i in range(arg1 * 2):
-    PEERS += '                "peer' + str(i) + """.org1.example.com": {
+    PEERS += '                "peer' + str(i + 1) + """.org1.example.com": {
                     "endorsingPeer": true,
                     "chaincodeQuery": true,
                     "eventSource": true
@@ -40,7 +40,7 @@ for i in range(arg1):
 ORDERERCONFIG = ORDERERCONFIG[:-2]
 
 for i in range(arg1):
-    PEERCONFIG += '        "peer' + str((i*2)+ 1) + """.org1.example.com":{ 
+    PEERCONFIG += '        "peer' + str((i*2) + 1) + """.org1.example.com":{ 
             "url": "grpcs://{IP-HOST-""" + str(i + 1) + """}:9051",
             "eventUrl": "grpcs://{IP-HOST-""" + str(i + 1) + """}:9053",
             "grpcOptions": {
